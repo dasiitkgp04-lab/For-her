@@ -14,25 +14,31 @@
       justify-content: center;
       font-family: 'Segoe UI', sans-serif;
       background: #a37474;
-      overflow: hidden;
+      overflow-y: auto;   /* ✅ allow scroll so image won’t get cut */
       color: white;
       text-align: center;
+      padding: 20px;     /* ✅ spacing on small screens */
     }
 
     .card {
       background: rgba(0,0,0,0.15);
-      padding: 40px 25px;
+      padding: 30px 20px;
       border-radius: 20px;
       max-width: 420px;
-      width: 90%;
+      width: 100%;
       position: relative;
       z-index: 2;
       backdrop-filter: blur(6px);
+      box-sizing: border-box;
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 15px;
     }
 
     p {
@@ -51,6 +57,7 @@
       font-weight: bold;
       box-shadow: 0 10px 25px rgba(255, 77, 109, 0.5);
       transition: 0.2s;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -64,12 +71,14 @@
       border: 5px solid white;
       box-shadow: 0 10px 30px rgba(255,105,180,0.6);
       display: none;
+      max-width: 100%;
     }
 
     .photo img {
       width: 100%;
-      height: auto;
+      height: auto;          /* ✅ prevent cutting */
       display: block;
+      object-fit: contain;  /* ✅ no crop */
     }
 
     .footer {
@@ -86,6 +95,8 @@
       font-size: 18px;
       animation: floatUp 6s linear infinite;
       opacity: 0.7;
+      pointer-events: none;
+      z-index: 1;
     }
 
     @keyframes floatUp {
@@ -101,7 +112,7 @@
     <h1>Hey Mou 💖</h1>
     <p>I made something special just for you...</p>
 
-    <a href="#" class="btn" onclick="showSurprise()">Click for your Surprise 🎁</a>
+    <a class="btn" onclick="showSurprise()">Click for your Surprise 🎁</a>
 
     <h2>Happy Birthday, Mou 🎉</h2>
 
@@ -123,6 +134,7 @@
   <script>
     function showSurprise() {
       document.getElementById("photoBox").style.display = "block";
+      document.getElementById("photoBox").scrollIntoView({ behavior: "smooth" }); // nice touch
     }
 
     // Floating hearts generator
@@ -135,8 +147,9 @@
       document.body.appendChild(heart);
 
       setTimeout(() => heart.remove(), 7000);
-    }, 500);
+    }, 600);
   </script>
 
 </body>
 </html>
+
