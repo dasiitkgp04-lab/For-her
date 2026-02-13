@@ -184,7 +184,7 @@
     }, 600);
 
     // ⏳ Countdown Timer (28 Jan 2027)
-    const targetDate = new Date("2027-01-28T00:00:00").getTime();
+    const targetDate = new Date("2027-02-28T00:00:00").getTime();
 
     const countdownEl = document.getElementById("countdown");
 
@@ -193,7 +193,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = "It's 28th January 2027 🎉💖";
+        countdownEl.innerHTML = "It's 28th February 2027 🎉💖";
         return;
       }
 
@@ -203,10 +203,11 @@
       const seconds = Math.floor((diff / 1000) % 60);
 
       countdownEl.innerHTML = 
-        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for 28th January 2027`;
+        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your next birthday`;
     }, 1000);
   </script>
 
 </body>
 </html>
+
 
