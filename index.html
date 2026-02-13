@@ -30,30 +30,10 @@
       z-index: 2;
       backdrop-filter: blur(6px);
       box-sizing: border-box;
-      display: none; /* hidden until password correct */
-    }
-
-    .lock {
-      background: rgba(0,0,0,0.2);
-      padding: 30px 20px;
-      border-radius: 20px;
-      max-width: 360px;
-      width: 100%;
-      backdrop-filter: blur(6px);
+      display: block; /* show directly */
     }
 
     h1 { font-size: 2rem; margin-bottom: 10px; }
-
-    input {
-      padding: 12px;
-      border-radius: 999px;
-      border: none;
-      outline: none;
-      width: 80%;
-      margin-top: 10px;
-      font-size: 1rem;
-      text-align: center;
-    }
 
     .btn {
       margin: 10px 6px;
@@ -107,26 +87,9 @@
       10% { opacity: 0.7; }
       100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
     }
-
-    .error {
-      color: #ffd1dc;
-      margin-top: 10px;
-      font-size: 0.9rem;
-      display: none;
-    }
   </style>
 </head>
 <body>
-
-  <!-- 🔐 Lock Screen -->
-  <div class="lock" id="lockBox">
-    <h1>Only for Mou 💖</h1>
-    <p>Enter the secret password to unlock your surprise 🎁</p>
-    <input type="password" id="password" placeholder="Enter password" />
-    <br/>
-    <button class="btn" onclick="checkPassword()">Unlock 💌</button>
-    <div class="error" id="errorText">Oops! Wrong password 😅 Try again.</div>
-  </div>
 
   <!-- 💖 Main Card -->
   <div class="card" id="mainCard">
@@ -147,7 +110,7 @@
     </div>
 
     <div class="photo" id="photo2">
-      <img src="us.jpg.jpeg" alt="Our moment" >
+      <img src="us.jpg.jpeg" alt="Our moment">
     </div>
 
     <p>
@@ -162,20 +125,6 @@
   </div>
 
   <script>
-    const SECRET_PASSWORD = "DIPAMOU"; // change if you want
-
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      const error = document.getElementById("errorText");
-
-      if (input === SECRET_PASSWORD) {
-        document.getElementById("lockBox").style.display = "none";
-        document.getElementById("mainCard").style.display = "block";
-      } else {
-        error.style.display = "block";
-      }
-    }
-
     function showPhoto(id) {
       const allPhotos = document.querySelectorAll(".photo");
       allPhotos.forEach(p => p.style.display = "none");
@@ -198,10 +147,4 @@
 
 </body>
 </html>
-
-
-
-
-
-
 
