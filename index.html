@@ -118,7 +118,7 @@
 
     <!-- ⏳ Countdown Timer -->
     <div class="timer" id="countdown">
-      Counting down to 28th January 2027... ⏳
+      Counting down to 28th February 2027... ⏳
     </div>
 
     <h2>Happy Birthday, Mou 🎉</h2>
@@ -184,7 +184,7 @@
     }, 600);
 
     // ⏳ Countdown Timer (28 Jan 2027)
-    const targetDate = new Date("2027-01-28T00:00:00").getTime();
+    const targetDate = new Date("2027-02-28T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
     setInterval(() => {
@@ -192,7 +192,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = "It's 28th January 2027 🎉💖";
+        countdownEl.innerHTML = "It's 28th February 2027 🎉💖";
         return;
       }
 
@@ -208,4 +208,5 @@
 
 </body>
 </html>
+
 
