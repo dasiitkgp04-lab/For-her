@@ -103,6 +103,42 @@
       font-size: 0.9rem;
       opacity: 0.85;
     }
+
+    /* Surprise 3 Popup */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .popup {
+      background: rgba(0,0,0,0.75);
+      border-radius: 20px;
+      padding: 25px 20px;
+      max-width: 360px;
+      width: 100%;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .popup h3 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -115,6 +151,7 @@
     <div>
       <button class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</button>
       <button class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</button>
+      <button class="btn" onclick="openSurprise3()">Surprise 3 ✨</button>
     </div>
 
     <div>
@@ -159,6 +196,21 @@
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- 💌 Surprise 3 Popup -->
+  <div class="overlay" id="surprise3Overlay">
+    <div class="popup">
+      <h3>For You 💖</h3>
+      <p>
+        Mou, on your special day I just want you to know how much you mean to me.  
+        You’ve become a beautiful part of my everyday thoughts —  
+        in my smiles, in my worries, and in my quiet moments.  
+        With you, even ordinary days feel special.  
+        I hope this little surprise makes you smile the way you make me smile. ✨💖
+      </p>
+      <button class="close-btn" onclick="closeSurprise3()">Close ✨</button>
+    </div>
+  </div>
+
   <script>
     const music = document.getElementById("bgMusic");
     let isPlaying = false;
@@ -176,6 +228,14 @@
       const selected = document.getElementById(id);
       selected.style.display = "block";
       selected.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openSurprise3() {
+      document.getElementById("surprise3Overlay").style.display = "flex";
+    }
+
+    function closeSurprise3() {
+      document.getElementById("surprise3Overlay").style.display = "none";
     }
 
     setInterval(() => {
