@@ -48,6 +48,7 @@
       transition: 0.2s;
       cursor: pointer;
       font-size: 0.95rem;
+      border: none;
     }
 
     .btn:hover { transform: scale(1.05); }
@@ -98,8 +99,8 @@
     }
 
     .visitor-counter {
-      margin-top: 15px;
-      font-size: 0.9rem;
+      margin-top: 12px;
+      font-size: 0.85rem;
       opacity: 0.8;
     }
   </style>
@@ -107,30 +108,25 @@
 
 <body>
 
-  <!-- 💖 Main Card -->
   <div class="card" id="mainCard">
     <h1>Hey Mou 💖</h1>
     <p>I made something special just for you...</p>
 
-    <!-- Buttons -->
     <div>
-      <a class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</a>
-      <a class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</a>
+      <button class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</button>
+      <button class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</button>
     </div>
 
-    <!-- 🎵 Music Button -->
     <div>
       <button class="btn" onclick="toggleMusic()">Play / Pause Music 🎵</button>
     </div>
 
-    <!-- ⏳ Countdown Timer -->
     <div class="timer" id="countdown">
       Counting down to 28th February 2027... ⏳
     </div>
 
     <h2>Happy Birthday, Mou 🎉</h2>
 
-    <!-- Photos -->
     <div class="photo" id="photo1">
       <img src="hand.jpg" alt="Our moment" style="max-width: 60%; margin: 0 auto; display: block;">
     </div>
@@ -152,30 +148,26 @@
     <!-- 👀 Visitor Counter -->
     <div class="visitor-counter">
       👀 Visitors:
-      <img src="https://hitwebcounter.com/counter/counter.php?page=123456&style=0006&nbdigits=5&type=ip&initCount=0" alt="visitor counter" />
+      <a href="https://www.hitwebcounter.com/" target="_blank">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=21476806&style=0032&nbdigits=4&type=ip&initCount=0" alt="visitor counter" />
+      </a>
     </div>
   </div>
 
-  <!-- 🎶 Background Music -->
   <audio id="bgMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // 🎵 Music control
     const music = document.getElementById("bgMusic");
     let isPlaying = false;
 
     function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
-      }
+      if (isPlaying) music.pause();
+      else music.play();
       isPlaying = !isPlaying;
     }
 
-    // 📸 Photo switch
     function showPhoto(id) {
       const allPhotos = document.querySelectorAll(".photo");
       allPhotos.forEach(p => p.style.display = "none");
@@ -185,7 +177,6 @@
       selected.scrollIntoView({ behavior: "smooth" });
     }
 
-    // ❤️ Floating hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -196,7 +187,6 @@
       setTimeout(() => heart.remove(), 7000);
     }, 600);
 
-    // ⏳ Countdown Timer (28 Feb 2027)
     const targetDate = new Date("2027-02-28T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -222,4 +212,3 @@
 </body>
 </html>
 
-   
