@@ -48,6 +48,7 @@
       transition: 0.2s;
       cursor: pointer;
       font-size: 0.95rem;
+      border: none;
     }
 
     .btn:hover { transform: scale(1.05); }
@@ -96,34 +97,36 @@
       padding: 10px;
       border-radius: 12px;
     }
+
+    .visitor-counter {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- 💖 Main Card -->
   <div class="card" id="mainCard">
     <h1>Hey Mou 💖</h1>
     <p>I made something special just for you...</p>
 
-    <!-- Buttons -->
     <div>
-      <a class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</a>
-      <a class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</a>
+      <button class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</button>
+      <button class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</button>
     </div>
 
-    <!-- 🎵 Music Button -->
     <div>
       <button class="btn" onclick="toggleMusic()">Play / Pause Music 🎵</button>
     </div>
 
-    <!-- ⏳ Countdown Timer -->
     <div class="timer" id="countdown">
-      Counting down to 28th January 2027... ⏳
+      Counting down to 28th February 2027... ⏳
     </div>
 
     <h2>Happy Birthday, Mou 🎉</h2>
 
-    <!-- Photos -->
     <div class="photo" id="photo1">
       <img src="hand.jpg" alt="Our moment" style="max-width: 60%; margin: 0 auto; display: block;">
     </div>
@@ -141,6 +144,14 @@
       — From your Physicist 💖 <br/>
       28th February 2026
     </div>
+
+    <!-- 👀 Visible Visitor Counter -->
+    <div class="visitor-counter">
+      👀 Visitors:
+      <a href="https://www.hitwebcounter.com/" target="_blank" style="text-decoration:none;">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=21476809&style=0006&nbdigits=4&type=ip&initCount=80" alt="visitor counter" />
+      </a>
+    </div>
   </div>
 
   <!-- 🎶 Background Music -->
@@ -149,20 +160,15 @@
   </audio>
 
   <script>
-    // 🎵 Music control
     const music = document.getElementById("bgMusic");
     let isPlaying = false;
 
     function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
-      }
+      if (isPlaying) music.pause();
+      else music.play();
       isPlaying = !isPlaying;
     }
 
-    // 📸 Photo switch
     function showPhoto(id) {
       const allPhotos = document.querySelectorAll(".photo");
       allPhotos.forEach(p => p.style.display = "none");
@@ -172,7 +178,6 @@
       selected.scrollIntoView({ behavior: "smooth" });
     }
 
-    // ❤️ Floating hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -183,8 +188,7 @@
       setTimeout(() => heart.remove(), 7000);
     }, 600);
 
-    // ⏳ Countdown Timer (28 Jan 2027)
-    const targetDate = new Date("2027-01-28T00:00:00").getTime();
+    const targetDate = new Date("2027-02-28T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
     setInterval(() => {
@@ -192,7 +196,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = "It's 28th January 2027 🎉💖";
+        countdownEl.innerHTML = "It's 28th February 2027 🎉💖";
         return;
       }
 
@@ -202,11 +206,10 @@
       const seconds = Math.floor((diff / 1000) % 60);
 
       countdownEl.innerHTML = 
-        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for 28th January 2027`;
+        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your day`;
     }, 1000);
   </script>
 
 </body>
 </html>
-
 
