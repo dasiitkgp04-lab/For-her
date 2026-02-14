@@ -19,22 +19,7 @@
       text-align: center;
       padding: 20px;
     }
-<div id="surprise3Overlay">
-  <div class="surprise3-container">
-    <div class="gift-box"></div>
 
-    <div class="surprise3-card" id="surprise3Card">
-      <h3>For You 💖</h3>
-      <p>
-        Mou, this is where you write your own message.  
-        You can say anything from your heart —  
-        what she means to you, what you wish for her,  
-        or just a simple “I’m always with you.”  
-      </p>
-      <button onclick="closeSurprise3()" class="close-btn">Close ✨</button>
-    </div>
-  </div>
-</div>
     .card {
       background: rgba(0,0,0,0.15);
       padding: 30px 20px;
@@ -111,8 +96,15 @@
       padding: 10px;
       border-radius: 12px;
     }
+
+    .visitor-counter {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- 💖 Main Card -->
@@ -156,6 +148,12 @@
       — From your Physicist 💖 <br/>
       28th February 2026
     </div>
+
+    <!-- 👀 Visitor Counter -->
+    <div class="visitor-counter">
+      👀 Visitors:
+      <img src="https://hitwebcounter.com/counter/counter.php?page=123456&style=0006&nbdigits=5&type=ip&initCount=0" alt="visitor counter" />
+    </div>
   </div>
 
   <!-- 🎶 Background Music -->
@@ -198,7 +196,7 @@
       setTimeout(() => heart.remove(), 7000);
     }, 600);
 
-    // ⏳ Countdown Timer (28 Jan 2027)
+    // ⏳ Countdown Timer (28 Feb 2027)
     const targetDate = new Date("2027-02-28T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -224,4 +222,4 @@
 </body>
 </html>
 
-
+   
