@@ -6,8 +6,6 @@
   <title>Happy Birthday Mou 💖</title>
 
   <style>
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -15,159 +13,200 @@
       align-items: center;
       justify-content: center;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      background: #a37474;
+      overflow-y: auto;
       color: white;
       text-align: center;
       padding: 20px;
     }
 
     .card {
-      width: 100%;
+      background: rgba(0,0,0,0.15);
+      padding: 30px 20px;
+      border-radius: 20px;
       max-width: 420px;
-      background: rgba(0,0,0,0.2);
-      padding: 25px 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    h1 { margin-bottom: 10px; }
-    p { line-height: 1.5; }
-
-    button {
-      margin: 8px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      background: #fff;
-      color: #7b2ff7;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-    }
-
-    textarea {
       width: 100%;
-      height: 80px;
-      border-radius: 10px;
-      border: none;
-      padding: 8px;
-      resize: none;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(6px);
+      box-sizing: border-box;
+      display: block;
     }
 
-    #countdown {
-      margin-top: 10px;
-      font-size: 18px;
+    h1 { font-size: 2rem; margin-bottom: 10px; }
+
+    .btn {
+      margin: 10px 6px;
+      padding: 12px 22px;
+      background: #ff4d6d;
+      color: white;
+      border-radius: 999px;
+      display: inline-block;
+      text-decoration: none;
       font-weight: bold;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.5);
+      transition: 0.2s;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn:hover { transform: scale(1.05); }
+
+    .photo {
+      margin: 20px auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(255,105,180,0.6);
+      display: none;
+      max-width: 100%;
+    }
+
+    .photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .footer { margin-top: 20px; font-size: 0.9rem; opacity: 0.85; }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff4d6d;
+      font-size: 18px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: 0.7; }
+      100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
+    }
+
+    .timer {
+      margin: 15px 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: rgba(0,0,0,0.25);
+      padding: 10px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Happy Birthday Mou 💖</h1>
+  <!-- 💖 Main Card -->
+  <div class="card" id="mainCard">
+    <h1>Hey Mou 💖</h1>
+    <p>I made something special just for you...</p>
+
+    <!-- Buttons -->
+    <div>
+      <a class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</a>
+      <a class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</a>
+    </div>
+
+    <!-- 🎵 Music Button -->
+    <div>
+      <button class="btn" onclick="toggleMusic()">Play / Pause Music 🎵</button>
+    </div>
+
+    <!-- ⏳ Countdown Timer -->
+    <div class="timer" id="countdown">
+      Counting down to 28th January 2027... ⏳
+    </div>
+
+    <h2>Happy Birthday, Mou 🎉</h2>
+
+    <!-- Photos -->
+    <div class="photo" id="photo1">
+      <img src="hand.jpg" alt="Our moment" style="max-width: 60%; margin: 0 auto; display: block;">
+    </div>
+
+    <div class="photo" id="photo2">
+      <img src="us.jpg.jpeg" alt="Our moment">
+    </div>
+
     <p>
-      On your special day, I just want to tell you —  
-      you make my ordinary days feel extraordinary.  
-      May your smile always stay this bright. 🌸
+      On your special day, I just want to tell you — you make my ordinary days feel extraordinary.
+      Your smile is my favorite place to rest. I’m grateful for you, today and always 💫
     </p>
 
-    <div id="countdown"></div>
-
-    <div>
-      <button onclick="showSurprise(1)">🎁 Surprise 1</button>
-      <button onclick="showSurprise(2)">🎁 Surprise 2</button>
-      <button onclick="showSurprise(3)">💌 Surprise 3</button>
+    <div class="footer">
+      — From your Physicist 💖 <br/>
+      28th February 2026
     </div>
-
-    <button onclick="toggleMusic()">🎵 Play / Pause Music</button>
-
-    <div id="surprise1" class="hidden">
-      <h3>Surprise 1 💫</h3>
-      <p>You are the reason some days feel magical ✨</p>
-    </div>
-
-    <div id="surprise2" class="hidden">
-      <h3>Surprise 2 🌙</h3>
-      <p>If smiles were stars, you’d light up my entire sky 🌌</p>
-    </div>
-
-    <div id="surprise3" class="hidden">
-      <h3>Surprise 3 💌 Messages</h3>
-      <p>Some messages just for you:</p>
-      <ul style="text-align:left;">
-        <li>🌸 You make people around you feel warm.</li>
-        <li>🌸 Your smile is contagious.</li>
-        <li>🌸 Never stop being you.</li>
-        <li>🌸 This world is kinder with you in it.</li>
-      </ul>
-
-      <p>Write something for me:</p>
-      <textarea id="herMessage" placeholder="Type here..."></textarea>
-      <br><br>
-      <button onclick="submitMessage()">Submit</button>
-
-      <p id="showMessage"></p>
-    </div>
-
-    <p style="margin-top:15px;">— From your Physicist 💙</p>
   </div>
 
+  <!-- 🎶 Background Music -->
   <audio id="bgMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    function showSurprise(n) {
-      document.getElementById("surprise1").style.display = "none";
-      document.getElementById("surprise2").style.display = "none";
-      document.getElementById("surprise3").style.display = "none";
-
-      document.getElementById("surprise" + n).style.display = "block";
-    }
+    // 🎵 Music control
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
 
     function toggleMusic() {
-      const music = document.getElementById("bgMusic");
-      if (music.paused) music.play();
-      else music.pause();
+      if (isPlaying) {
+        music.pause();
+      } else {
+        music.play();
+      }
+      isPlaying = !isPlaying;
     }
 
-    function submitMessage() {
-      const msg = document.getElementById("herMessage").value;
-      document.getElementById("showMessage").innerText = 
-        msg ? "She wrote: " + msg : "You didn’t write anything yet 🙂";
+    // 📸 Photo switch
+    function showPhoto(id) {
+      const allPhotos = document.querySelectorAll(".photo");
+      allPhotos.forEach(p => p.style.display = "none");
+
+      const selected = document.getElementById(id);
+      selected.style.display = "block";
+      selected.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Countdown
-    const targetDate = new Date("Feb 28, 2027 00:00:00").getTime();
+    // ❤️ Floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 600);
+
+    // ⏳ Countdown Timer (28 Jan 2027)
+    const targetDate = new Date("2027-01-28T00:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
     setInterval(() => {
       const now = new Date().getTime();
       const diff = targetDate - now;
 
-      if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("countdown").innerText =
-          "Countdown to our special day: " + days + " days left 💫";
-      } else {
-        document.getElementById("countdown").innerText =
-          "It's the special day today! 🎉💖";
+      if (diff <= 0) {
+        countdownEl.innerHTML = "It's 28th January 2027 🎉💖";
+        return;
       }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.innerHTML = 
+        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for 28th January 2027`;
     }, 1000);
   </script>
 
 </body>
 </html>
-
-
-
-
-
 
 
