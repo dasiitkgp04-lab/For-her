@@ -6,6 +6,8 @@
   <title>Happy Birthday Mou 💖</title>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -13,201 +15,128 @@
       align-items: center;
       justify-content: center;
       font-family: 'Segoe UI', sans-serif;
-      background: #a37474;
-      overflow-y: auto;
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      overflow-x: hidden;
       color: white;
       text-align: center;
       padding: 20px;
     }
 
     .card {
-      background: rgba(0,0,0,0.15);
-      padding: 30px 20px;
-      border-radius: 20px;
-      max-width: 420px;
       width: 100%;
-      position: relative;
-      z-index: 2;
+      max-width: 420px;
+      background: rgba(0,0,0,0.18);
+      padding: 25px 20px;
+      border-radius: 20px;
       backdrop-filter: blur(6px);
-      box-sizing: border-box;
-      display: block;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
-    h1 { font-size: 2rem; margin-bottom: 10px; }
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
 
     .btn {
-      margin: 10px 6px;
-      padding: 12px 22px;
+      margin: 10px;
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      background: #ffffff;
+      color: #333;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .wish-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 15px;
+    }
+
+    #wishBtn {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
       background: #ff4d6d;
       color: white;
-      border-radius: 999px;
-      display: inline-block;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.5);
       transition: 0.2s;
-      cursor: pointer;
-      font-size: 0.95rem;
-      border: none;
     }
 
-    .btn:hover { transform: scale(1.05); }
-
-    .photo {
-      margin: 20px auto;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 5px solid white;
-      box-shadow: 0 10px 30px rgba(255,105,180,0.6);
-      display: none;
-      max-width: 100%;
+    #wishBtn:hover {
+      transform: scale(1.05);
+      background: #ff1f4a;
     }
 
-    .photo img {
+    audio {
       width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
+      margin-top: 15px;
+      outline: none;
     }
 
-    .footer { margin-top: 20px; font-size: 0.9rem; opacity: 0.85; }
-
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #ff4d6d;
-      font-size: 18px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0; }
-      10% { opacity: 0.7; }
-      100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
-    }
-
-    .timer {
-      margin: 15px 0;
-      font-size: 1.1rem;
-      font-weight: bold;
-      background: rgba(0,0,0,0.25);
-      padding: 10px;
-      border-radius: 12px;
-    }
-
-    .visitor-counter {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      opacity: 0.85;
+    .footer {
+      margin-top: 15px;
+      font-size: 13px;
+      opacity: 0.8;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card" id="mainCard">
-    <h1>Hey Mou 💖</h1>
-    <p>I made something special just for you...</p>
-
-    <div>
-      <button class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</button>
-      <button class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</button>
-    </div>
-
-    <div>
-      <button class="btn" onclick="toggleMusic()">Play / Pause Music 🎵</button>
-    </div>
-
-    <div class="timer" id="countdown">
-      Counting down to 28th February 2027... ⏳
-    </div>
-
-    <h2>Happy Birthday, Mou 🎉</h2>
-
-    <div class="photo" id="photo1">
-      <img src="hand.jpg" alt="Our moment" style="max-width: 60%; margin: 0 auto; display: block;">
-    </div>
-
-    <div class="photo" id="photo2">
-      <img src="us.jpg.jpeg" alt="Our moment">
-    </div>
+  <div class="card">
+    <h1>🎉 Happy Birthday Mou 💖</h1>
 
     <p>
-      On your special day, I just want to tell you — you make my ordinary days feel extraordinary.
-      Your smile is my favorite place to rest. I’m grateful for you, today and always 💫
+      On this special day, I just want you to know how beautiful your presence is.  
+      May your life be filled with smiles, peace, and everything your heart wishes for. 🌸  
+      You deserve the best, always.
     </p>
 
-    <div class="footer">
-      — From your Physicist 💖 <br/>
-      28th February 2026
+    <button class="btn" onclick="alert('Surprise 1: You are truly special 💖')">Surprise 1 🎁</button>
+    <button class="btn" onclick="alert('Surprise 2: Keep smiling, the world needs it 😊')">Surprise 2 ✨</button>
+    <button class="btn" onclick="alert('Surprise 3: I’m always wishing the best for you 🌙')">Surprise 3 💌</button>
+
+    <!-- 🎶 Music -->
+    <audio controls autoplay loop>
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- 💖 Wish Button -->
+    <div class="wish-box">
+      <h2>Make a Wish for Mou 💖</h2>
+      <button id="wishBtn">💖 Make a Wish</button>
+      <p>Total Wishes: <span id="wishCount">0</span></p>
     </div>
 
-    <!-- 👀 Visible Visitor Counter -->
-    <div class="visitor-counter">
-      👀 Visitors:
-      <a href="https://www.hitwebcounter.com/" target="_blank" style="text-decoration:none;">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=21476809&style=0006&nbdigits=4&type=ip&initCount=80" alt="visitor counter" />
-      </a>
+    <div class="footer">
+      Made with ❤️ for Mou
     </div>
   </div>
 
-  <!-- 🎶 Background Music -->
-  <audio id="bgMusic" loop>
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
-    const music = document.getElementById("bgMusic");
-    let isPlaying = false;
+    let count = localStorage.getItem("wishCount") || 0;
+    document.getElementById("wishCount").innerText = count;
 
-    function toggleMusic() {
-      if (isPlaying) music.pause();
-      else music.play();
-      isPlaying = !isPlaying;
-    }
-
-    function showPhoto(id) {
-      const allPhotos = document.querySelectorAll(".photo");
-      allPhotos.forEach(p => p.style.display = "none");
-
-      const selected = document.getElementById(id);
-      selected.style.display = "block";
-      selected.scrollIntoView({ behavior: "smooth" });
-    }
-
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
-    }, 600);
-
-    const targetDate = new Date("2027-02-28T00:00:00").getTime();
-    const countdownEl = document.getElementById("countdown");
-
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        countdownEl.innerHTML = "It's 28th February 2027 🎉💖";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countdownEl.innerHTML = 
-        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your day`;
-    }, 1000);
+    document.getElementById("wishBtn").addEventListener("click", () => {
+      count++;
+      localStorage.setItem("wishCount", count);
+      document.getElementById("wishCount").innerText = count;
+    });
   </script>
 
 </body>
