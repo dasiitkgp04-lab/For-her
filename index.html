@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday Mou 💖</title>
 
- 
-
+  <style>
     body {
       margin: 0;
       min-height: 100vh;
@@ -104,6 +103,30 @@
       font-size: 0.9rem;
       opacity: 0.85;
     }
+
+    /* 💖 Wish Button Styles */
+    .wish-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 15px;
+    }
+
+    #wishBtn {
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      background: #ff1f4a;
+      color: white;
+      transition: 0.2s;
+    }
+
+    #wishBtn:hover {
+      transform: scale(1.05);
+      background: #ff4d6d;
+    }
   </style>
 </head>
 
@@ -140,6 +163,13 @@
       On your special day, I just want to tell you — you make my ordinary days feel extraordinary.
       Your smile is my favorite place to rest. I’m grateful for you, today and always 💫
     </p>
+
+    <!-- 💖 WISH BUTTON -->
+    <div class="wish-box">
+      <h3>Make a Wish for Mou 💖</h3>
+      <button id="wishBtn">💖 Make a Wish</button>
+      <p>Total Wishes: <span id="wishCount">0</span></p>
+    </div>
 
     <div class="footer">
       — From your Physicist 💖 <br/>
@@ -209,10 +239,22 @@
       countdownEl.innerHTML = 
         `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your day`;
     }, 1000);
+
+    /* 💖 Wish Counter Logic */
+    let count = localStorage.getItem("wishCount") || 0;
+    document.getElementById("wishCount").innerText = count;
+
+    document.getElementById("wishBtn").addEventListener("click", function () {
+      count++;
+      localStorage.setItem("wishCount", count);
+      document.getElementById("wishCount").innerText = count;
+    });
   </script>
 
 </body>
 </html>
+
+
 
 
 
