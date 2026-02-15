@@ -154,13 +154,8 @@
     <div>
       <button class="btn" onclick="showPhoto('photo1')">Surprise 1 🎁</button>
       <button class="btn" onclick="showPhoto('photo2')">Surprise 2 💖</button>
-      <!-- ✅ Added Surprise 3 button -->
       <button class="btn" onclick="openSurprise3()">Surprise 3 ✨</button>
       <button class="btn" onclick="openSurprise4()">Surprise 4 🕯️</button>
-    </div>
-
-    <div>
-      <button class="btn" onclick="toggleMusic()">Play / Pause Music 🎵</button>
     </div>
 
     <div class="timer" id="countdown">
@@ -187,7 +182,6 @@
       28th February 2026
     </div>
 
-    <!-- 👀 Visible Visitor Counter -->
     <div class="visitor-counter">
       👀 Visitors:
       <a href="https://www.hitwebcounter.com/" target="_blank" style="text-decoration:none;">
@@ -196,8 +190,8 @@
     </div>
   </div>
 
-  <!-- 🎶 Background Music -->
-  <audio id="bgMusic" loop>
+  <!-- 🎶 Background Music (Autoplay ON) -->
+  <audio id="bgMusic" autoplay loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
@@ -238,15 +232,6 @@
   </div>
 
   <script>
-    const music = document.getElementById("bgMusic");
-    let isPlaying = false;
-
-    function toggleMusic() {
-      if (isPlaying) music.pause();
-      else music.play();
-      isPlaying = !isPlaying;
-    }
-
     function showPhoto(id) {
       const allPhotos = document.querySelectorAll(".photo");
       allPhotos.forEach(p => p.style.display = "none");
@@ -255,7 +240,6 @@
       selected.scrollIntoView({ behavior: "smooth" });
     }
 
-    // ✅ Added Surprise 3 functions
     function openSurprise3() {
       document.getElementById("surprise3Overlay").style.display = "flex";
     }
@@ -273,6 +257,12 @@
     function lightCandle() {
       document.getElementById("candle").classList.add("lit");
     }
+
+    // Fallback: try to start music on first user interaction (for strict browsers)
+    document.addEventListener("click", () => {
+      const music = document.getElementById("bgMusic");
+      if (music.paused) music.play().catch(()=>{});
+    }, { once: true });
 
     setInterval(() => {
       const heart = document.createElement("div");
@@ -308,5 +298,4 @@
 
 </body>
 </html>
-
 
