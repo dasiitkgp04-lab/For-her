@@ -72,23 +72,6 @@
 
     .footer { margin-top: 20px; font-size: 0.9rem; opacity: 0.85; }
 
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #ff4d6d;
-      font-size: 18px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0; }
-      10% { opacity: 0.7; }
-      100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
-    }
-
     .timer {
       margin: 15px 0;
       font-size: 1.1rem;
@@ -135,26 +118,20 @@
       font-weight: bold;
     }
 
-    .candle-wrap { margin: 15px auto 5px; cursor: pointer; width: 60px; }
-    .candle { width: 24px; height: 60px; background: #f2f2f2; border-radius: 6px; margin: 0 auto; position: relative; }
-    .wick { position: absolute; top: -6px; left: 50%; width: 2px; height: 8px; background: #222; transform: translateX(-50%); }
-    .flame { position: absolute; top: -28px; left: 50%; width: 16px; height: 24px; background: radial-gradient(circle at 50% 70%, #ffd27d 0%, #ff9f43 60%, #ff6b6b 100%); border-radius: 50%; transform: translateX(-50%); opacity: 0; }
-    .lit .flame { opacity: 1; }
-    .wish { margin-top: 10px; opacity: 0; transition: 0.6s; }
-    .lit + .wish { opacity: 1; }
-
-    /* 🎉 Effects */
-    .effect {
+    /* 🎈🎆✨💖 Continuous Effects */
+    .float {
       position: fixed;
-      z-index: 10;
+      bottom: -30px;
+      font-size: 26px;
       pointer-events: none;
-      font-size: 28px;
-      animation: pop 1.2s ease-out forwards;
+      z-index: 9;
+      animation: floatUp 5s linear forwards;
+      opacity: 0.9;
     }
-    @keyframes pop {
-      0% { transform: scale(0.6) translateY(0); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: scale(1.6) translateY(-120px); opacity: 0; }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 0.9; }
+      to   { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
 
     .spark {
@@ -162,13 +139,14 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      z-index: 10;
       pointer-events: none;
-      animation: spark 0.9s ease-out forwards;
+      z-index: 9;
+      animation: spark 1s ease-out forwards;
     }
+
     @keyframes spark {
       from { transform: translate(0,0) scale(1); opacity: 1; }
-      to { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+      to   { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
     }
   </style>
 </head>
@@ -180,10 +158,10 @@
     <p>I made something special just for you...</p>
 
     <div>
-      <button class="btn" onclick="balloonEffect(); showPhoto('photo1')">Surprise 1 🎁</button>
-      <button class="btn" onclick="fireworkEffect(); showPhoto('photo2')">Surprise 2 💖</button>
-      <button class="btn" onclick="sparkleEffect(); openSurprise3()">Surprise 3 ✨</button>
-      <button class="btn" onclick="heartEffect(); openSurprise4()">Surprise 4 🕯️</button>
+      <button class="btn" onclick="startBalloons(); showPhoto('photo1')">Surprise 1 🎁</button>
+      <button class="btn" onclick="startFireworks(); showPhoto('photo2')">Surprise 2 💖</button>
+      <button class="btn" onclick="startSparkles(); openSurprise3()">Surprise 3 ✨</button>
+      <button class="btn" onclick="startHearts(); openSurprise4()">Surprise 4 🕯️</button>
     </div>
 
     <div class="timer" id="countdown">
@@ -218,7 +196,6 @@
     </div>
   </div>
 
-  <!-- 🎶 Background Music -->
   <audio id="bgMusic" autoplay loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
@@ -227,14 +204,8 @@
   <div class="overlay" id="surprise3Overlay">
     <div class="popup">
       <h3>For You 💖</h3>
-      <p>
-        Mou, on your special day I just want you to know how much you mean to me.  
-        You’ve become a beautiful part of my everyday thoughts —  
-        in my smiles, in my worries, and in my quiet moments.  
-        With you, even ordinary days feel special.  
-        I hope this little surprise makes you smile the way you make me smile. ✨💖
-      </p>
-      <button class="close-btn" onclick="closeSurprise3()">Close ✨</button>
+      <p>Put your message here…</p>
+      <button class="close-btn" onclick="stopAllEffects(); closeSurprise3()">Close ✨</button>
     </div>
   </div>
 
@@ -242,91 +213,67 @@
   <div class="overlay" id="surprise4Overlay">
     <div class="popup">
       <h3>Light a Candle for a Wish 🕯️</h3>
-      <p style="font-size:0.9rem; opacity:0.85;">Tap the candle to light a wish for you.</p>
-
-      <div class="candle-wrap" onclick="lightCandle()">
-        <div class="candle" id="candle">
-          <div class="wick"></div>
-          <div class="flame"></div>
-        </div>
-        <div class="wish" id="wishText">
-          I lit this candle for you — for peace on heavy days, courage when you doubt yourself,  
-          and little joys to find you often. May your light always stay bright. ✨
-        </div>
-      </div>
-
-      <button class="close-btn" onclick="closeSurprise4()">Close ✨</button>
+      <p>Tap the candle to light a wish.</p>
+      <button class="close-btn" onclick="stopAllEffects(); closeSurprise4()">Close ✨</button>
     </div>
   </div>
 
   <script>
-    function randomXY() {
-      return {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight * 0.6 + window.innerHeight * 0.2
-      };
+    let effectTimer = null;
+
+    function stopAllEffects() {
+      if (effectTimer) clearInterval(effectTimer);
+      effectTimer = null;
     }
 
-    function balloonEffect() {
-      for (let i = 0; i < 6; i++) {
-        const el = document.createElement("div");
-        el.className = "effect";
-        el.innerText = "🎈";
-        const {x, y} = randomXY();
-        el.style.left = x + "px";
-        el.style.top = y + "px";
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1200);
-      }
+    function spawnFloat(emoji) {
+      const el = document.createElement("div");
+      el.className = "float";
+      el.innerText = emoji;
+      el.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
     }
 
-    function fireworkEffect() {
-      const {x, y} = randomXY();
-      for (let i = 0; i < 16; i++) {
+    function spawnSparkBurst() {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight * 0.6 + window.innerHeight * 0.2;
+      for (let i = 0; i < 10; i++) {
         const s = document.createElement("div");
         s.className = "spark";
         s.style.left = x + "px";
         s.style.top = y + "px";
-        s.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
+        s.style.background = `hsl(${Math.random()*360},90%,60%)`;
         s.style.setProperty("--dx", (Math.random()*200 - 100) + "px");
         s.style.setProperty("--dy", (Math.random()*200 - 100) + "px");
         document.body.appendChild(s);
-        setTimeout(() => s.remove(), 900);
+        setTimeout(() => s.remove(), 1000);
       }
     }
 
-    function sparkleEffect() {
-      for (let i = 0; i < 8; i++) {
-        const el = document.createElement("div");
-        el.className = "effect";
-        el.innerText = "✨";
-        const {x, y} = randomXY();
-        el.style.left = x + "px";
-        el.style.top = y + "px";
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1200);
-      }
+    function startBalloons() {
+      stopAllEffects();
+      effectTimer = setInterval(() => spawnFloat("🎈"), 500);
     }
 
-    function heartEffect() {
-      for (let i = 0; i < 6; i++) {
-        const el = document.createElement("div");
-        el.className = "effect";
-        el.innerText = "💖";
-        const {x, y} = randomXY();
-        el.style.left = x + "px";
-        el.style.top = y + "px";
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1200);
-      }
+    function startFireworks() {
+      stopAllEffects();
+      effectTimer = setInterval(() => spawnSparkBurst(), 800);
+    }
+
+    function startSparkles() {
+      stopAllEffects();
+      effectTimer = setInterval(() => spawnFloat("✨"), 400);
+    }
+
+    function startHearts() {
+      stopAllEffects();
+      effectTimer = setInterval(() => spawnFloat("💖"), 450);
     }
 
     function showPhoto(id) {
-      const allPhotos = document.querySelectorAll(".photo");
-      allPhotos.forEach(p => p.style.display = "none");
-      const selected = document.getElementById(id);
-      selected.style.display = "block";
-      selected.scrollIntoView({ behavior: "smooth" });
+      document.querySelectorAll(".photo").forEach(p => p.style.display = "none");
+      document.getElementById(id).style.display = "block";
     }
 
     function openSurprise3() {
@@ -341,24 +288,9 @@
     }
     function closeSurprise4() {
       document.getElementById("surprise4Overlay").style.display = "none";
-      document.getElementById("candle").classList.remove("lit");
-    }
-    function lightCandle() {
-      document.getElementById("candle").classList.add("lit");
     }
 
-    // Floating hearts background
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
-    }, 600);
-
-    // Countdown
+    // Countdown (keep your existing one if you had)
     const targetDate = new Date("2027-02-28T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -376,7 +308,7 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      countdownEl.innerHTML = 
+      countdownEl.innerHTML =
         `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your day`;
     }, 1000);
   </script>
