@@ -218,11 +218,46 @@
     </div>
   </div>
 
+  <!-- 🎶 Background Music -->
   <audio id="bgMusic" autoplay loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Popups remain same (Surprise 3 & 4) -->
+  <!-- 💌 Surprise 3 Popup -->
+  <div class="overlay" id="surprise3Overlay">
+    <div class="popup">
+      <h3>For You 💖</h3>
+      <p>
+        Mou, on your special day I just want you to know how much you mean to me.  
+        You’ve become a beautiful part of my everyday thoughts —  
+        in my smiles, in my worries, and in my quiet moments.  
+        With you, even ordinary days feel special.  
+        I hope this little surprise makes you smile the way you make me smile. ✨💖
+      </p>
+      <button class="close-btn" onclick="closeSurprise3()">Close ✨</button>
+    </div>
+  </div>
+
+  <!-- 🕯️ Surprise 4 Popup -->
+  <div class="overlay" id="surprise4Overlay">
+    <div class="popup">
+      <h3>Light a Candle for a Wish 🕯️</h3>
+      <p style="font-size:0.9rem; opacity:0.85;">Tap the candle to light a wish for you.</p>
+
+      <div class="candle-wrap" onclick="lightCandle()">
+        <div class="candle" id="candle">
+          <div class="wick"></div>
+          <div class="flame"></div>
+        </div>
+        <div class="wish" id="wishText">
+          I lit this candle for you — for peace on heavy days, courage when you doubt yourself,  
+          and little joys to find you often. May your light always stay bright. ✨
+        </div>
+      </div>
+
+      <button class="close-btn" onclick="closeSurprise4()">Close ✨</button>
+    </div>
+  </div>
 
   <script>
     function randomXY() {
@@ -286,7 +321,64 @@
       }
     }
 
-    // Keep your existing JS (countdown, hearts, popups) below
+    function showPhoto(id) {
+      const allPhotos = document.querySelectorAll(".photo");
+      allPhotos.forEach(p => p.style.display = "none");
+      const selected = document.getElementById(id);
+      selected.style.display = "block";
+      selected.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openSurprise3() {
+      document.getElementById("surprise3Overlay").style.display = "flex";
+    }
+    function closeSurprise3() {
+      document.getElementById("surprise3Overlay").style.display = "none";
+    }
+
+    function openSurprise4() {
+      document.getElementById("surprise4Overlay").style.display = "flex";
+    }
+    function closeSurprise4() {
+      document.getElementById("surprise4Overlay").style.display = "none";
+      document.getElementById("candle").classList.remove("lit");
+    }
+    function lightCandle() {
+      document.getElementById("candle").classList.add("lit");
+    }
+
+    // Floating hearts background
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 600);
+
+    // Countdown
+    const targetDate = new Date("2027-02-28T00:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownEl.innerHTML = "It's 28th February 2027 🎉💖";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.innerHTML = 
+        `⏳ ${days} days ${hours} hrs ${minutes} min ${seconds} sec left for your day`;
+    }, 1000);
   </script>
 
 </body>
